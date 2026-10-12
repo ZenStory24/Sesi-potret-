@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <style>
+
+body {
+    margin: 0;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 1;
+}
+
+.container {
+    width: 450px;
+    height: 100px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background: #66666664;
+    margin: 430px;
+    padding: 20px auto;
+    position: absolute;
+    z-index: 2;
+}
+
+#text { 
+  position: absolute;
+  margin: 30px;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+    </style>
+</head>
+<body>
+    
+<div class='container'>
+  <b><p id='text'></p></b>
+</div>
+
+<video class="video" autoplay muted loop playsinline class="video">
+  <source src="background.mp4" type="video/mp4">
+</video>
+
+
+  <script>
+  const text = document.getElementById('text');
+
+  let i = 0;
+  let j = 0;
+
+  const lirik = [
+    'Ku bertamu ke rumah barumu',
+    'Tak ada kamu',
+    'Hanya papan dan namamu',
+    'Mana ocehan wewangian khasmu?',
+    'Jarak ini terlalu jauh',
+    'Kalau rindu aku tak mampu',
+    'Sesal hatiku tak sempat temani kamu',
+    'Haruskah kubisikan kata ajaib ke telingamu?',
+    'Soal ikhlas ternyata aku masih amatir',
+    'Masih sangat amatir...'
+  ];
+
+  const delay = [3000, 2000, 1000, 3000, 1000, 1300, 2300, 2000, 2200, 2200]
+
+  function typeText() {
+    if (i < lirik[j].length) {
+      text.innerHTML += lirik[j].charAt(i);
+      i++;
+      setTimeout(typeText, 100);
+    } else {
+      setTimeout(() => {
+        if (j < lirik.length - 1) {
+          j++;
+          i = 0;
+          text.innerHTML = '';
+          typeText();
+        } else {
+          console.log('Lirik selesai!');
+        }
+      }, delay[j]);
+    }
+  }
+
+  setTimeout(() => {
+    console.log('p');
+    typeText();
+  }, 2000);
+ 
+  </script>
+</body>
+</html>
